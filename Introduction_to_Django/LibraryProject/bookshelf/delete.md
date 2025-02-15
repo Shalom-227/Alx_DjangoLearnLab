@@ -3,6 +3,9 @@
 # open Django shell
 python manage.py shell
 
+#import model book
+from bookshelf.models import Book
+
 my_book.delete()
 # output: (1, {'bookshelf.Book': 1})
 
