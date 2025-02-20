@@ -8,10 +8,10 @@ author = Author.objects.get(name = "")
 print(author.book_set.all())
 
 #List all books in a library.
-library = Library.objects.get()
+library = Library.objects.get(name="library_name")
 print(library.books.all())
 
 #Retrieve the librarian for a library.
-library = Library.objects.get()
-print(library.librarian)
+librarian = Librarian.objects.get(name="librarian_name")
+print(librarian.library)
 
