@@ -25,5 +25,5 @@ urlpatterns = [
     path('bookshelf/', bookshelf_view),
     path('relationship_app', relationship_app_view),
     path('library_detail/', relationship_appListView.as_view(), name='library_detail'),
-    path('<pk>/', relationship_appDetailView.as_view(), name='library_detail') 
+    path('<int:pk>/', LibraryDetailView.as_view(), name='library_detail') 
 ]
