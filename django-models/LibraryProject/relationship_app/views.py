@@ -16,6 +16,10 @@ def relationship_app_view(request):
     context = {'book_list': books}
     return render(request, 'relationship_app/list_books.html')
 
+def list_books(request):
+    books = Books.objects.all()
+    context = {'book_list': books}
+    return render(request, 'relationship_app/list_books.html')
 
 #Create a class-based view 
 #Utilising the ListView to display details for a specific library, listing all books available in that library.

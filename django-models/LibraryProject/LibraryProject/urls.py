@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from bookshelf.views import bookshelf_view
-from relationship_app.views import relationship_app_view, relationship_appListView, relationship_appDetailView
+from relationship_app.views import relationship_app_view, relationship_appListView, LibraryDetailView, list_books
 
 
 urlpatterns = [
@@ -25,5 +25,6 @@ urlpatterns = [
     path('bookshelf/', bookshelf_view),
     path('relationship_app', relationship_app_view),
     path('library_detail/', relationship_appListView.as_view(), name='library_detail'),
-    path('<pk>/', relationship_appDetailView.as_view(), name='library_detail') 
+    path('<pk>/', LibraryDetailView.as_view(), name='library_detail'),
+    path('list_books/', list_books, name="list_books"),
 ]
