@@ -17,7 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from bookshelf.views import bookshelf_view
-from .views import relationship_app_view, relationship_appListView, LibraryDetailView, list_books
+from .views import relationship_app_view, relationship_appListView, LibraryDetailView
+from .views import list_books
 
 
 urlpatterns = [
