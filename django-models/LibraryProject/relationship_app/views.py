@@ -25,7 +25,7 @@ class relationship_appListView(ListView):
 
 
 #Create a class-based view                                                  #Utilising the DetailView to display details for a specific library, listing all books available in that library.
-class relationship_appDetailView(DetailView):
+class LibraryDetailView(DetailView):
     model = Library
     template_name = "relationship_app/library_detail.html"
 
