@@ -36,12 +36,12 @@ class UserProfile(models.Model):
     LIBRARIAN = 'Librarian'
     MEMBER = 'Member'
 
-    ROLE_CHOICES = [ (ADMIN, 'Admin'), (LIBRARIAN, 'Librarian'), (MEMBER, 'Member'),]
+    ROLE_CHOICES = [ (ADMIN, 'Admin'), (LIBRARIAN, 'Librarian'), (MEMBER, 'Member')]
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     role = models.CharField(max_length=10, choices=ROLE_CHOICES, default=MEMBER)
 
     def __str__(self):
-        return f'{self.user.username} is {self.role}'
+        return f"{self.user.username} is {self.role}"
 
 
