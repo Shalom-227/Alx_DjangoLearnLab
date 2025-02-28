@@ -105,14 +105,14 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTHENTICATION_BACKENDS = [
         'django.contrib.auth.backends.ModelBackend',
-        'relationship_app.backends.CustomAuthBackend',
+        'bookshelf.backends.CustomAuthBackend',
         ]
 
 
 
 #Redirect users after login and logout 
 LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = 'relationship_app/login'
+LOGOUT_REDIRECT_URL = 'bookshelf/login'
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
