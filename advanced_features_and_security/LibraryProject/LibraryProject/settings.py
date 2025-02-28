@@ -71,7 +71,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'LibraryProject.wsgi.application'
 
-AUTH_USER_MODEL = 'bookstore.CustomUser'
+AUTH_USER_MODEL = 'bookshelf.CustomUser'
 
 
 # Database
