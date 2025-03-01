@@ -18,6 +18,7 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import permission_required
 from django.http import HttpResponseForbidden
 from .models import Article
+from .forms import ArticleForm
 
 
 
@@ -93,13 +94,10 @@ def article_create(request):
     if request.method == 'POST':
         form = ArticleForm(request.POST)
         if form.is_valid():
-            article = form.save(commit=False)
-            article.author = request.user
             article.save()
             return redirect('articles:article_list')  
     else:
         form = ArticleForm()  
-
     return render(request, 'bookshelf/article_create.html')
 
 @permission_required('app_name.can_edit', raise_exception=True)
@@ -116,3 +114,7 @@ def article_delete(request, pk):
         article.delete()
         return redirect('article_list')
     return render(request, 'articles/article_confirm_delete.html', {'article': article})
+
+
+
+

@@ -1,0 +1,6 @@
+<!-- LibraryProject/bookshelf/templates/bookshelf/book_form.html -->
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}  <!-- Renders the form fields as <p> elements -->
+    <button type="submit">Save</button>
+</form>
