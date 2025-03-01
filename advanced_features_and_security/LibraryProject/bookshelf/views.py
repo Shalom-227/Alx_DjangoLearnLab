@@ -19,6 +19,7 @@ from django.contrib.auth.decorators import permission_required
 from django.http import HttpResponseForbidden
 from .models import Article
 from .forms import ArticleForm
+from .forms import ExampleForm
 
 
 
