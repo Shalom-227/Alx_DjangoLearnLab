@@ -17,32 +17,31 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from bookshelf.views import bookshelf_view
-from relationship_app.views import relationship_app_view, relationship_appListView, LibraryDetailView, list_books
-from relationship_app.views import RegisterView
+#from relationship_app.views import relationship_app_view, relationship_appListView, LibraryDetailView, list_books
+#from relationship_app.views import RegisterView
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.views import LogoutView
-from relationship_app.views import register
+#:wqfrom relationship_app.views import register
 from django.contrib.auth import views as auth_views
-from relationship_app.views import member_view, librarian_view
-from relationship_app import views
+#from relationship_app.views import member_view, librarian_view
+#from relationship_app import views
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('bookshelf/', bookshelf_view),
-    path('relationship_app', relationship_app_view),
-    path('library_detail/', relationship_appListView.as_view(), name='library_detail'),
-    path('library_detail/', LibraryDetailView.as_view(), name='library_detail'),
-    path('list_books/', list_books, name="list_books"),
-    path('register/', RegisterView.as_view(template_name='relationship_app/register.html'), name='register'),
-    path('register/', views.register, name='register'),
-    path('login/', LoginView.as_view(template_name='relationship_app/login.html'), name='login'),
-    path('logout/', LogoutView.as_view(template_name ='relationship_app/logout.html'), name='logout'),
+    path('relationship_app', bookshelf_view),
+    path('library_detail/', bookshelf_view, name='library_detail'),
+    #path('library_detail/', LibraryDetailView.as_view(), name='library_detail'),
+    #path('list_books/', list_books, name="list_books"),
+    path('login/', LoginView.as_view(template_name='bookshelf/login.html'), name='login'),
+#    path('logout/', LogoutView.as_view(template_name ='bookshelf/logout.html'), name='logout'),
      path('logout/', auth_views.LogoutView.as_view(), name='logout'),
-     path('librarian/', librarian_view, name='librarian_view'),
-     path('member/', member_view, name='member_view'),
-     path('add_book/', views.add_book, name='add_book'),
-     path('edit_book/<int:book_id>/', views.edit_book, name='edit_book'),
-     path('delete_book/<int:book_id>/', views.delete_book, name='delete_book'),
-     path('', include("relationship_app.urls")),
+     #path('librarian/', librarian_view, name='librarian_view'),
+     #path('member/', member_view, name='member_view'),
+     #path('add_book/', views.add_book, name='add_book'),
+     #path('edit_book/<int:book_id>/', views.edit_book, name='edit_book'),
+     #path('delete_book/<int:book_id>/', views.delete_book, name='delete_book'),
+ #    path('', include("relationship_app.urls")),
+     path('', include("bookshelf.urls"))
 ]

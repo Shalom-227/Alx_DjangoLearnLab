@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import CustomUser
+from .models import CustomUser, Profile
 
 
 # Register your models here.
@@ -20,4 +20,5 @@ class CustomUserAdmin(UserAdmin):
         ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}))
     ordering = ('email',)
 
-admin.site.register(CustomUser, CustomUserAdmin)
+admin.site.register(CustomUser)
+admin.site.register(Profile)

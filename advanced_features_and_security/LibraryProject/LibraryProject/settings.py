@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bookshelf',
-    'relationship_app',
 ]
 
 MIDDLEWARE = [
@@ -104,15 +103,17 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 AUTHENTICATION_BACKENDS = [
+        'bookshelf.backends.CustomBackend',
         'django.contrib.auth.backends.ModelBackend',
-        'relationship_app.backends.CustomAuthBackend',
         ]
 
 
 
 #Redirect users after login and logout 
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = 'relationship_app/login'
+LOGIN_REDIRECT_URL = '/admin/'
+LOGIN_URL = '/admin/login/'
+LOGOUT_REDIRECT_URL = 'bookshelf/login'
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
