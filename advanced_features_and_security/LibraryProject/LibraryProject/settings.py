@@ -48,6 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'csp.middleware.CSPMiddleware',
 ]
 
 ROOT_URLCONF = 'LibraryProject.urls'
@@ -151,3 +152,10 @@ SECURE_SSL_REDIRECT = True  # Forces HTTP requests to redirect to HTTPS
 SECURE_HSTS_SECONDS = 31536000  # 1 year in seconds, tells browsers to only use HTTPS
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True  # Apply HSTS to subdomains
 SECURE_HSTS_PRELOAD = True  # Preload your domain for HTTPS
+
+
+
+
+CSP_DEFAULT_SRC = ("'self'",)  # Only allow content from the same origin
+CSP_SCRIPT_SRC = ("'self'", 'https://apis.google.com')  # Allow scripts from the same origin and Google API
+CSP_STYLE_SRC = ("'self'", 'https://fonts.googleapis.com')  # Allow styles from the same origin and Google Fonts
