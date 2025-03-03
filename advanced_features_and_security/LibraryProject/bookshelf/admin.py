@@ -20,5 +20,5 @@ class CustomUserAdmin(UserAdmin):
         ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}))
     ordering = ('email',)
 
-admin.site.register(CustomUser)
+admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.register(Profile)
