@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework import generics
-from rest_framework import permissions 
+from rest_framework import permissions
 from .models import Book, Author
 from .serializers import BookSerializer, AuthorSerializer
 from datetime import datetime
