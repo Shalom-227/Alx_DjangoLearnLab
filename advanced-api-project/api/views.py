@@ -4,6 +4,7 @@ from rest_framework import permissions
 from .models import Book, Author
 from .serializers import BookSerializer, AuthorSerializer
 from datetime import datetime
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 from rest_framework.permissions import BasePermission
 
 
