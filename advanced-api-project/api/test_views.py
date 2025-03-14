@@ -13,6 +13,7 @@ class BookAPITestCase(APIClient):
     def setUp(self):
         """Set up test data before each test."""
         self.client = APIClient()
+        self.client.login(username="testuser", password="password123")
 
         # Create a test user
         self.user = User.objects.create_user(username="testuser", password="testpass")
@@ -32,7 +33,7 @@ class BookAPITestCase(APIClient):
         self.detail_url = f"/api/books/{self.book.id}/"
 
         #url names to match url patterns
-        lf.list_url = reverse("book-list")  # /api/books/
+        self.list_url = reverse("book-list")  # /api/books/
         self.detail_url = reverse("book-detail", kwargs={"pk": self.book.id})  # /api/books/1/
         self.create_url = reverse("book-create")  # /api/books/create/
         self.update_url = reverse("book-update", kwargs={"pk": self.book.id})  # /api/books/1/update/
