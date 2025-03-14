@@ -11,7 +11,7 @@ class Author(models.Model):
 
 class Book(models.Model):
     title = models.CharField(max_length=150)
-    publication_year = models.DateField()
+    publication_year = models.IntegerField()
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
 
     def __str__(self):
