@@ -2,11 +2,12 @@ from django.shortcuts import render
 from rest_framework import generics
 from rest_framework import permissions
 from .models import Book, Author
-from .serializers import BookSerializer, AuthorSerializer
+from .serializers import BookSerializer
 from datetime import datetime
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 from rest_framework.permissions import BasePermission
-
+from rest_framework import filters
+from django_filter.rest_framework import DjangoFilterBackend
 
 # Create your views here.
 
@@ -15,6 +16,15 @@ class ListView(generics.ListAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     #permissions not set allowing unauthenticated users read-only access
+
+    # Add filtering, searching, and ordering
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
+    # List of # Fields that can be filtered
+    filterset_fields = ["title", "author", "publication_year"]
+    # List of Fields that can be searched using '?search=keyword'
+    search_fields = ["title", "author"]
+    # Fields that can be used for sorting using '?ordering=title'
+    ordering_fields = ["title", "publication_year"]
 
 
 class DetailView(generics.RetrieveAPIView):
