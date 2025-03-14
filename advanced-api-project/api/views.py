@@ -7,6 +7,7 @@ from datetime import datetime
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 from rest_framework.permissions import BasePermission
 from rest_framework import filters
+from django_filters import rest_framework 
 from django_filters.rest_framework import DjangoFilterBackend
 
 # Create your views here.
