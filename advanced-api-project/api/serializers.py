@@ -1,4 +1,4 @@
-from rest-framework import serializers
+from rest_framework import serializers
 from .models import Author, Book
 from datetime import date
 
