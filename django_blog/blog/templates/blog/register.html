@@ -1,0 +1,16 @@
+{% extends 'blog/base.html' %}
+
+
+{% load static %}
+
+{% block content %}
+<h2>Register</h2>
+<form method="post">
+    {% csrf_token %}
+    <a href="{% url 'posts' %}">Blog Posts</a>
+    {{ form.as_p }}
+    <button type="submit">Register</button>
+</form>
+<p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+{% endblock %}
+
