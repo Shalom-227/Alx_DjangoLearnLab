@@ -7,7 +7,9 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from .models import Post
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy
+
 
 
 # Create your views here.
@@ -55,7 +57,7 @@ def profile(request):
     return render(request, 'blog/profile.html', {'form': form})
 
 
-'''defining a view to list post instances'''
+'''defining a view to list Post instances'''
 def post_list(request):
     posts = Post.objects.all()
     return render(request, 'blog/post_list.html', {'posts': posts})
@@ -63,45 +65,45 @@ def post_list(request):
 
 '''creating Use Django’s class-based views to handle CRUD operations
    by extending ListView, DetailView, CreateView, UpdateView, DeleteView '''
-# Custom Based View to list all objects
+
+# Custom Based View to list all Post instances/objects
 class PostListView(ListView):
     model = Post
     template_name = 'blog/post_list.html'
     context_object_name = 'posts'
 
-
+# Custom Based View to fetch detail of a Post instance
 class PostDetailView(DetailView):
     model = Post
     template_name = 'blog/post_detail.html'
     context_object_name = 'posts'
 
-#import decorators to ensure only logged in users can create Post instance
-@method_decorator(login_required, name='dispatch')
-class PostCreateView(CreateView):
+#import mixin to ensure only logged-in users can create Post instances
+class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     template_name = 'blog/post_form.html'
     fields = ['title', 'content', 'published_date', 'author']
-    success_url = reverse_lazy('post_list')
 
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
 
-#import decorators to ensure only logged in users can edit Post instance
-@method_decorator(login_required, name='dispatch')
-class PostUpdateView(UpdateView):
+#import mixins to ensure only logged in authors can update Post instance
+class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
     template_name = 'blog/post_form.html'
-    fields = ['title', 'content', 'author']
-    success_url = reverse_lazy('post_list')
+    fields = ['title', 'content']
 
-    def get_object(self, queryset=None):
-        return super().get_object(queryset)
+    def form_valid(self, form):
+        form.instance.author = self.request.user  # Ensure author remains the same
+        return super().form_valid(form)
 
-#import decorators to ensure only logged in users can delete Post instance
-@method_decorator(login_required, name='dispatch')
-class PostDeleteView(DeleteView):
+#import mixins to ensure only logged in author can delete Post instance
+class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Post
     template_name = 'blog/post_confirm_delete.html'
-    success_url = reverse_lazy('post_list')
+    success_url = reverse_lazy('post-list')  # Redirect after deletion
 
-    def get_object(self, queryset=None):
-        return super().get_object(queryset)
-
+    def test_func(self):
+        post = self.get_object()
+        return self.request.user == post.author  
