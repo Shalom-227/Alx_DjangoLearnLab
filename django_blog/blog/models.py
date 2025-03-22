@@ -17,9 +17,19 @@ class Post(models.Model):
 class UserProfile(models.Model):
     bio = models.TextField(blank=True)
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
+    email = models.EmailField(null=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    
 
     def __str__(self):
         return f'{self.user.username} Profile'
 
+class Comment(models.Model):
+    post = models.ForeignKey('blog.Post', on_delete=models.CASCADE, related_name='comments')
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return f'Comment by {self.author} on {self.post}'

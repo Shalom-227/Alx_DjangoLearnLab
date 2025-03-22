@@ -1,0 +1,18 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+<h2>Comments</h2>
+{% for comment in comments %}
+    <div class="comment">
+        <p><strong>{{ comment.author }}</strong> - {{ comment.created_at|date:"F j, Y, g:i a" }}</p>
+        <p>{{ comment.content }}</p>
+        {% if comment.author == request.user %}
+            <a href="{% url 'comment_edit' comment.id %}">Edit</a>
+            <a href="{% url 'comment_delete' comment.id %}">Delete</a>
+        {% endif %}
+    </div>
+{% empty %}
+    <p>No comments yet.</p>
+{% endfor %}
+{% endblock %}
+

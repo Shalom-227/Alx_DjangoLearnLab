@@ -1,0 +1,25 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}
+Home - Welcome
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Welcome to Your Dashboard!</h1>
+    <p>You have successfully logged in.</p>
+
+    <div class="user-info">
+        <h2>Hello, {{ user.username }}!</h2>
+        <p>This is your home page where you can manage your account and other settings.</p>
+    </div>
+
+    <div class="navigation">
+        <h3>Quick Links:</h3>
+        <ul>
+            <li><a href="{% url 'profile' %}">View Profile</a></li>
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
