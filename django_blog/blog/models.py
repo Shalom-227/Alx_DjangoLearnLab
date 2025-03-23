@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from taggit.managers import TaggableManager
 
 # Create your models here.
 
@@ -16,7 +16,7 @@ class Post(models.Model):
     published_date = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     #one post can have many tags so it makes sense to define the M2M relationship here in the Post model
-    tags = models.ManyToManyField(Tag, blank=True)
+    tags = TaggableManager()  # Add tagging support. TaggableManager automatically handles the M2M field. As such we don't have to define it.
 
     def __str__(self):
         return self.title
