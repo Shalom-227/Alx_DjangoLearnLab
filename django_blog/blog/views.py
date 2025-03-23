@@ -4,7 +4,7 @@ from .forms import CustomUserCreationForm, UserProfileForm, CommentForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Post, Comment
+from .models import Post, Comment, Tag
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -177,12 +177,23 @@ class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 
 
-''' defining post tag function to ensure tags work just fine'''
-def posts_by_tag(request, tag_name):
-    tag = get_object_or_404(Tag, name=tag_name)  # Get tag or return 404 if not found
-    posts = Post.objects.filter(tags=tag)  # Fetch all posts with this tag
-    return render(request, 'blog/posts_by_tag.html', {'tag': tag, 'posts': posts})
+''' defining post tag function to ensure tags work just fine using Django's ListView'''
+class PostByTagListView(ListView):
+    model = Post
+    template_name = "blog/posts_by_tag.html"
+    context_object_name = "posts"
 
+    def get_queryset(self):
+        """Filter posts by tag"""
+        tag_name = self.kwargs.get("tag_name")  # Get tag from URL
+        tag = get_object_or_404(Tag, name=tag_name)  # Fetch tag or return 404
+        return Post.objects.filter(tags__in=[tag])  # Filter posts with this tag
+
+    def get_context_data(self, **kwargs):
+        """Pass the tag to the template"""
+        context = super().get_context_data(**kwargs)
+        context["tag"] = self.kwargs.get("tag_name")
+        return context
 
 
 
