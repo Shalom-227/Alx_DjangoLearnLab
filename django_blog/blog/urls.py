@@ -28,6 +28,10 @@ urlpatterns = [
     path("comment/<int:pk>/update/", views.CommentUpdateView.as_view(), name="comment_edit"),
     path("comment/<int:pk>/delete/", views.CommentDeleteView.as_view(), name="comment_delete"),
 
+    #views for tags and search functionality
+    path("search/", views.search_posts, name="search"),
+    path("tags/<slug:tag_slug>/", views.posts_by_tag, name="posts_by_tag"),
+
 
 
 

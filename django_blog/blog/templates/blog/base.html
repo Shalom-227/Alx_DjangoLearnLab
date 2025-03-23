@@ -13,8 +13,18 @@
             <ul>
                 <li><a href="{% url 'home' %}">Home</a></li>
                 <li><a href="{% url 'posts' %}">Blog Posts</a></li>
+		{% if user.is_authenticated %}
+			<!-- Show Logout Button when User is Logged In -->
+			<li>
+				<form action="{% url 'logout' %}" method="post" style="display: inline;">
+					{% csrf_token %}
+					<button type="submit" style="border: none; background: none; cursor: pointer; color: blue;">Logout</button>
+				</form>
+			</li>
+			{% else %}
                 <li><a href="{% url 'login' %}">Login</a></li>
                 <li><a href="{% url 'register' %}">Register</a></li>
+		{% endif %}
             </ul>
         </nav>
     </header>

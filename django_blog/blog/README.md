@@ -91,4 +91,20 @@ Profile Management (Users can update their details)
     **Viewing Comments**: Comments are publicly visible to all users, regardless of authentication status.
 
 
+# Blog Post Tagging & Search
+
+## Adding Tags to Posts
+1. When creating a new post, enter comma-separated tags in the "Tags" field.
+2. Click "Submit" to save the post with tags.
+
+## Searching for Posts
+1. Enter keywords in the search bar.
+2. Results will include posts matching the title, content, or tags.
+
+## Filtering Posts by Tags
+1. Click on a tag in any post to view all posts associated with it.
+
+## Permissions
+- Any user can search and view posts.
+- Only authenticated users can create/edit/delete posts with tags.
 
