@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import CustomUser
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, get_user_model
 from rest_framework.authtoken.models import Token
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -20,12 +20,16 @@ class RegisterSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         """Create user with hashed password"""
         validated_data.pop('password2')  # Remove password2 before saving
-        user = CustomUser.objects.create_user(**validated_data)  # Hashes password
+        user = get_user_model().objects.create_user(**validated_data)  # Hashes password
         return user
 
 class LoginSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(required=True)
-    password = serializers.CharField(required=True, write_only=True)
+    password = serializers.CharField(required=True, write_only=True)i
+
+    class Meta:
+        model = get_user_model()  # Ensure CustomUser model is used
+        fields = ["email", "password"]
 
     def validate(self, data):
         """Authenticate user"""
@@ -35,9 +39,10 @@ class LoginSerializer(serializers.ModelSerializer):
         """Validate user credentials"""
         user = authenticate(username=email, password=password)
 
-        if not User:
+        if not user:
             raise serializers.ValidationError("Invalid credentials")
-        return user
+        token, _ = Token.objects.get_or_create(user=user)  # Create or retrieve token
+        return {"token": token.key, "user": user}
 
 class TokenSerializer(serializers.ModelSerializer):
     user_id = serializers.IntegerField(source="user.id", read_only=True)
