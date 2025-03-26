@@ -5,7 +5,7 @@ from rest_framework.authtoken.models import Token
 
 class RegisterSerializer(serializers.ModelSerializer):
     password2 = serializers.CharField(write_only=True)  # Confirm password
-
+    
     class Meta:
         model = CustomUser
         fields = ['username', 'bio', 'profile_picture', 'email', 'password', 'password2']
@@ -41,7 +41,8 @@ class LoginSerializer(serializers.ModelSerializer):
 
         if not user:
             raise serializers.ValidationError("Invalid credentials")
-        token, _ = Token.objects.get_or_create(user=user)  # Create or retrieve token
+        
+        token, created = Token.objects.get_or_create(user=user)  # Retrieve token or retrieve token if it does not exist
         return {"token": token.key, "user": user}
 
 class TokenSerializer(serializers.ModelSerializer):
