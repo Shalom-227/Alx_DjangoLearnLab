@@ -26,10 +26,13 @@ class LoginView(ObtainAuthToken):
         serializer.is_valid(raise_exception=True)
 
         user = serializer.validated_data["user"]
+
+        #get authentication token or create one upon login
         token, created = Token.objects.get_or_create(user=user)
 
+        #serialise token data
         token_serializer = TokenSerializer(instance=token)
-        return Response(token_serializer.data)
+        return Response(token_serializer.data, status=status.HTTP_200_OK)
 
 class LogoutView(APIView):
     permission_classes = [permissions.IsAuthenticated]
