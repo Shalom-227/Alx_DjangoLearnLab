@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from rest_framework import viewsets, permissions
+from rest_framework import viewsets, permissions, generics
 from .models import Post, Comment
 from .serializers import PostSerializer, CommentSerializer
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
@@ -57,3 +57,4 @@ class FollowedPostsView(generics.ListAPIView):
         user = self.request.user
         following_users = user.following.all()  # Get users the current user follows
         return Post.objects.filter(author__in=following_users).order_by('-created_at')  # Get their posts
+
