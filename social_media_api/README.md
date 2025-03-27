@@ -52,4 +52,23 @@ GET /feed/                 *VIEW A POST FIELD*
 - *ENDPOINT SUPPORT FOR FILTERING*
 /posts/?search=AI  # Fetches posts containing "AI"
 
+## Likes and Notifications System API Documentation
 
+*Features*
+
+- Users can like and unlike posts.
+- Users receive notifications when their posts are liked.
+- Users can view and mark notifications as read.
+
+*Endpoints*
+
+POST /posts/{post_id}/like/
+DELETE /posts/{post_id}/unlike/
+GET /notifications/
+PUT /notifications/read/
+
+*User Interaction & Engagement Benefits
+
+- Increased Engagement: Users can actively interact with posts, boosting community participation.
+- Real-time Feedback: Users are notified when their posts receive interactions, keeping them informed.
+- Better User Experience: A well-structured notification system helps users stay updated without manually checking interactions.
