@@ -87,7 +87,7 @@ class UserFollowersView(APIView):
         serializer = FollowSerializer(followers, many=True)
         return Response(serializer.data)
 
-class UserFollowingView(GenericAPIView):
+class UserFollowingView(generics.GenericAPIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request, user_id):
