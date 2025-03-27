@@ -1,6 +1,5 @@
 from django.shortcuts import render
-from rest_framework.viewsets import ModelViewSet
-from rest_framework import permissions
+from rest_framework import viewsets, permissions
 from .models import Post, Comment
 from .serializers import PostSerializer, CommentSerializer
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
@@ -23,7 +22,7 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
         return obj.author == request.user
 
 
-class PostViewSet(ModelViewSet):
+class PostViewSet(viewsets.ModelViewSet):
     #ModelViewSet provides all CRUD operations
     queryset = Post.objects.all()
     serializer_class = PostSerializer
@@ -37,7 +36,7 @@ class PostViewSet(ModelViewSet):
         """Ensure the logged-in user is set as the author when creating a post."""
         serializer.save(author=self.request.user)
 
-class CommentViewSet(ModelViewSet):
+class CommentViewSet(viewsets.ModelViewSet):
     #ModelViewSet provides all CRUD operations
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
