@@ -45,3 +45,15 @@ class CommentViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         """Ensure the logged-in user is set as the author when creating a comment."""
         serializer.save(author=self.request.user)
+
+class FollowedPostsView(generics.ListAPIView):
+    """
+    View to show posts from users the authenticated user follows.
+    """
+    serializer_class = PostSerializer
+    permission_classes = [permissions.IsAuthenticated]  # Ensure user is logged in
+
+    def get_queryset(self):
+        user = self.request.user
+        following_users = user.following.all()  # Get users the current user follows
+        return Post.objects.filter(author__in=following_users).order_by('-created_at')  # Get their posts
