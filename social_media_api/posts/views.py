@@ -66,8 +66,8 @@ class FollowedPostsView(generics.ListAPIView):
 class LikePostView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
-    def post(self, request, post_id):
-        post = get_object_or_404(Post, id=post_id)
+    def post(self, request, pk):
+        post = get_object_or_404(Post, id=pk)
         like, created = Like.objects.get_or_create(user=request.user, post=post)
 
         if created:
@@ -86,7 +86,7 @@ class LikePostView(APIView):
 class UnlikePostView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
-    def delete(self, request, post_id):
+    def delete(self, request, pk):
         post = generics.get_object_or_404(Post, pk=pk)
         like = Like.objects.filter(user=request.user, post=post)
 
