@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from rest_framework.views import APIView 
 from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework import generics
 
 
 # Create your views here.
@@ -86,7 +87,7 @@ class UserFollowersView(APIView):
         serializer = FollowSerializer(followers, many=True)
         return Response(serializer.data)
 
-class UserFollowingView(APIView):
+class UserFollowingView(GenericAPIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request, user_id):
