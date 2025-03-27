@@ -32,3 +32,24 @@ The CustomUser model extends AbstractUser and adds:
 bio: A text field for user bio.
 profile_picture: An image field for user profile pictures.
 followers: A Many-to-Many self-referencing relationship (users can follow each other).
+
+
+# AUTHENTICATION ENDPOINTS
+
+ POST /register/
+POST /login/
+POST /logout/
+POST /follow/{user_id}/    *FOLLOW A USER*
+POST /unfollow/{user_id}/  *UNFOLLOW A USER *
+GET /followers/            * GET LIST OF FOLLOWERS*
+GET /following/            *GET LIST OF FOLLOWING USERS*
+POST /posts/               
+POST /posts/{post_id}/comments/
+GET /feed/                 *VIEW A POST FIELD*
+
+- *ENDPOINT SUPPORT FOR PAGINATION*
+ /posts/?page=2  # Fetches page 2 of posts
+- *ENDPOINT SUPPORT FOR FILTERING*
+/posts/?search=AI  # Fetches posts containing "AI"
+
+
