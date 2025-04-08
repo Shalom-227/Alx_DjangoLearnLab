@@ -142,3 +142,29 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
+
+
+#securing django application for production
+## helps protect against Cross-Site Scripting (XSS) attacks. It enables the browser's built-in XSS filtering to protect users.
+SECURE_BROWSER_XSS_FILTER = True
+
+## prevents your site from being embedded in a frame or iframe, helping to protect against Clickjacking attacks.The value 'DENY' ensures that your site cannot be embedded in any iframe, whereas 'SAMEORIGIN' only allows embedding on the same origin.
+X_FRAME_OPTIONS = 'DENY'
+
+##ensures that your application always uses HTTPS by redirecting HTTP requests to HTTPS.
+SECURE_SSL_REDIRECT = True
+
+##HTTP Strict Transport Security (HSTS) forces browsers to only use HTTPS for all future requests to your site.
+SECURE_HSTS_SECONDS = 31536000  # Enforce HTTPS for 1 year
+
+##Prevents browsers from interpreting files as something they are not (e.g., not interpreting a .jpg file as JavaScript).
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+##controls cross-origin communication. Set it to 'same-origin' for increased security.
+SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin'
+
+##helps prevent resources from being embedded cross-origin.
+SECURE_CROSS_ORIGIN_EMBEDDER_POLICY = 'require-corp'
+
+
+
