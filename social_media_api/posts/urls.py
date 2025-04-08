@@ -12,6 +12,6 @@ urlpatterns = [
         
        path('', include(router.urls)),
        path('feed/', views.FollowedPostsView.as_view(), name='followed-posts'),
-       path("/<int:pk>/like/", views.LikePostView.as_view(), name="like-post"),
-    path("/<int:pk>/unlike/", views.UnlikePostView.as_view(), name="unlike-post"),
+       path("<int:pk>/like/", views.LikePostView.as_view(), name="like-post"),
+    path("<int:pk>/unlike/", views.UnlikePostView.as_view(), name="unlike-post"),
         ]

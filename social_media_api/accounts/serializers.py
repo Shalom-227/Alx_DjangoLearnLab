@@ -39,11 +39,14 @@ class LoginSerializer(serializers.ModelSerializer):
         password = data.get('password')
 
         """Validate user credentials"""
-        user = authenticate(username=email, password=password)
-
-        if not user:
+        try:
+           user = get_user_model().objects.get(email=email)
+        except get_user_model().DoesNotExist:
             raise serializers.ValidationError("Invalid credentials")
-        
+
+        if not user.check_password(password):  # Use check_password to compare the password
+            raise serializers.ValidationError("Invalid credentials")
+
         token, created = Token.objects.get_or_create(user=user)  # Retrieve token or retrieve token if it does not exist
         return {"token": token.key, "user": user}
 
@@ -62,7 +65,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = ['username', 'email', 'bio', 'profile_picture', 'followers_count']
+        fields = ['username', 'email', 'bio', 'profile_picture', 'followers_count', "following_count"]
 
     def get_followers_count(self, obj):
         return obj.followers.count()

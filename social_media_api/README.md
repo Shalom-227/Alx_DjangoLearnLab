@@ -39,13 +39,13 @@ followers: A Many-to-Many self-referencing relationship (users can follow each o
  POST /register/
 POST /login/
 POST /logout/
-POST /follow/{user_id}/    *FOLLOW A USER*
-POST /unfollow/{user_id}/  *UNFOLLOW A USER *
-GET /followers/            * GET LIST OF FOLLOWERS*
-GET /following/            *GET LIST OF FOLLOWING USERS*
-POST /posts/               
-POST /posts/{post_id}/comments/
-GET /feed/                 *VIEW A POST FIELD*
+POST /follow/{user_id}/            *FOLLOW A USER*
+POST /unfollow/{user_id}/          *UNFOLLOW A USER *
+GET /followers/                    * GET LIST OF FOLLOWERS*
+GET /following/                    *GET LIST OF FOLLOWING USERS*
+POST /posts/                       *CREATE A POST*       
+POST /posts/{post_id}/comments/    *COMMENT ON A POST
+GET /feed/                         *VIEW A POST FIELD*
 
 - *ENDPOINT SUPPORT FOR PAGINATION*
  /posts/?page=2  # Fetches page 2 of posts
