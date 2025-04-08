@@ -145,6 +145,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
 
+# Define the STATIC_ROOT setting
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # You can choose any directory name
+#Run afterwards in CLI python manage.py collectstatic
+
+# Example: Other static files settings
+STATIC_URL = '/static/'
+
 #SECURING DJANGO APPLICATION FOR PRODUCTION
 
 ## helps protect against Cross-Site Scripting (XSS) attacks. It enables the browser's built-in XSS filtering to protect users.
