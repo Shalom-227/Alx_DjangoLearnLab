@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -144,7 +145,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
 
-#securing django application for production
+#SECURING DJANGO APPLICATION FOR PRODUCTION
+
 ## helps protect against Cross-Site Scripting (XSS) attacks. It enables the browser's built-in XSS filtering to protect users.
 SECURE_BROWSER_XSS_FILTER = True
 
@@ -166,5 +168,6 @@ SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin'
 ##helps prevent resources from being embedded cross-origin.
 SECURE_CROSS_ORIGIN_EMBEDDER_POLICY = 'require-corp'
 
-
+##ADDING PORT
+PORT = os.getenv('PORT', '8000')  # Default to 8000 if PORT is not set
 
